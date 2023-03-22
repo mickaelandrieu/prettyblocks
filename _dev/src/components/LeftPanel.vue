@@ -25,24 +25,13 @@ const loadStateConfig = async (e) => {
   let currentBlock = useStore()
   // set store cuurent block name
   await currentBlock.$patch({
-    // code: e.id,
     need_reload: e.need_reload,
     id_prettyblocks: e.id_prettyblocks,
-    // instance_id: e.instance_id
   })
   emitter.emit('displayBlockConfig', e);
 
 }
-// emitter.on('loadStateConfig', async (id_prettyblocks) => {
-//   let block = await Block.loadById(id_prettyblocks)
-//   console.log('block', block.id_prettyblocks)
-//   loadStateConfig(block)
-//   const store = useStore()
-//      store.$patch({
-//         id_prettyblocks: block.id_prettyblocks,
-//         subSelected: block.code+'_'+block.id_prettyblocks
-//     })
-// })
+
 
 let displayZoneName = ref()
 const loadSubState = async (e) => {
@@ -120,7 +109,14 @@ const state = ref({
   <div id="leftPanel" class="border-r border-gray-200">
     <div class="flex flex-col h-full">
       <div class="p-2 border-b border-gray-200">
-        <ZoneSelect v-model="state" />
+        <div class="flex items-center justify-between">
+          <div>
+            <ZoneSelect v-model="state" />
+          </div>
+          <div class="pr-5">
+            <ButtonLight icon="Square2StackIcon" size="6"/>
+          </div>
+        </div>
       </div>
       <div class="overflow-y-auto flex-grow p-2 border-b border-gray-200">
         <!-- sortable component is used to sort by drag and drop -->
